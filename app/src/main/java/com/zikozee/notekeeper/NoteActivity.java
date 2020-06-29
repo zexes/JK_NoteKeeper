@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
+    public static final String NOTE_INFO = "com.zikozee.notekeeper.NOTE_INFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
