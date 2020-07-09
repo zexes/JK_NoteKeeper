@@ -3,6 +3,7 @@ package com.zikozee.notekeeper;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
@@ -37,6 +38,11 @@ public class NoteActivity extends AppCompatActivity {
         ViewModelProvider viewModelProvider = new ViewModelProvider(getViewModelStore(),
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()));
         mViewModel = viewModelProvider.get(NoteActivityViewModel.class);
+
+        if(mViewModel.mIsNewlyCreated && savedInstanceState != null)
+            mViewModel.restoreState(savedInstanceState);
+
+        mViewModel.mIsNewlyCreated = false;
 
         mSpinnerCourses = findViewById(R.id.spinner_courses);
 
@@ -73,6 +79,13 @@ public class NoteActivity extends AppCompatActivity {
         }else{
             saveNote();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if(outState != null) mViewModel.saveState(outState);
     }
 
     private void storePreviousNoteValues() {
