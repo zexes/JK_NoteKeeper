@@ -17,6 +17,7 @@ import java.util.List;
 
 public class NoteListActivity extends AppCompatActivity {
 
+
     private ArrayAdapter<NoteInfo> mAdapterNotes;
 
     @Override
