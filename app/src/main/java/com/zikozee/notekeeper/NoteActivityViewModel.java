@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.lifecycle.ViewModel;
 
-class NoteActivityViewModel extends ViewModel {
+public class NoteActivityViewModel extends ViewModel {
 
     public static final String ORIGINAL_NOTE_COURSE_ID = "com.zikozee.notekeeper.ORIGINAL_NOTE_COURSE_ID";
     public static final String ORIGINAL_NOTE_TITLE = "com.zikozee.notekeeper.ORIGINAL_NOTE_TITLE";
