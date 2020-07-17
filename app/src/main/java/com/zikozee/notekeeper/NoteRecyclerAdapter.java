@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +22,8 @@ class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.ViewH
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View itemView = mLayoutInflater.inflate(R.layout.item_note_list, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -36,8 +38,13 @@ class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.ViewH
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        public final TextView mTextCourse;
+        public final TextView mTextTitle;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mTextCourse = itemView.findViewById(R.id.text_course);
+            mTextTitle = itemView.findViewById(R.id.text_title);
         }
     }
 }
