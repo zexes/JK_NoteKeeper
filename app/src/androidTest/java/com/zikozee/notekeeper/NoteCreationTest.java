@@ -1,6 +1,5 @@
 package com.zikozee.notekeeper;
 
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -8,8 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.*;
