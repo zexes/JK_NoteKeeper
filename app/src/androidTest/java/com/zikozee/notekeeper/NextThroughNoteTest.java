@@ -38,15 +38,23 @@ public class NextThroughNoteTest {
 
         //get first note information
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
-        int index = 0;
-        NoteInfo note = notes.get(index);
+        for (int index = 0; index < notes.size(); index++) {
+            NoteInfo note = notes.get(index);
 
-        //check if noteActivity has correct data i.e title n text
-        onView(withId(R.id.spinner_courses)).check(
-                matches(withSpinnerText(note.getCourse().getTitle())));
+            //check if noteActivity has correct data i.e title n text
+            onView(withId(R.id.spinner_courses)).check(
+                    matches(withSpinnerText(note.getCourse().getTitle())));
 
-        onView(withId(R.id.text_note_title)).check(matches(withText(note.getTitle())));
-        onView(withId(R.id.text_note_text)).check(matches(withText(note.getText())));
+            onView(withId(R.id.text_note_title)).check(matches(withText(note.getTitle())));
+            onView(withId(R.id.text_note_text)).check(matches(withText(note.getText())));
+
+            //check next menu item is enabled when not last item
+            if(index < notes.size() -1)
+                onView(allOf(withId(R.id.action_next), isEnabled())).perform(click());
+        }
+        //check next menu item is disabled on last item
+        onView(withId(R.id.action_next)).check(matches(not(isEnabled())));
+        pressBack();
     }
 
 }
