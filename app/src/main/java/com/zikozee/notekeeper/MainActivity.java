@@ -10,12 +10,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,6 +24,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private NoteRecyclerAdapter mNoteRecyclerAdapter;
+    private RecyclerView mRecyclerItems;
+    private LinearLayoutManager mNoteLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +62,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initiateDisplayContent() {
-        final RecyclerView recyclerNotes = (RecyclerView) findViewById(R.id.list_items);
-        final LinearLayoutManager noteLayoutManager = new LinearLayoutManager(this);
-        recyclerNotes.setLayoutManager(noteLayoutManager);
+        mRecyclerItems = (RecyclerView) findViewById(R.id.list_items);
+        mNoteLayoutManager = new LinearLayoutManager(this);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
         mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
-        recyclerNotes.setAdapter(mNoteRecyclerAdapter);
+        displayNotes();
+    }
+
+    private void displayNotes() {
+        mRecyclerItems.setLayoutManager(mNoteLayoutManager);
+        mRecyclerItems.setAdapter(mNoteRecyclerAdapter);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_notes).setChecked(true);
     }
 
     @Override
@@ -97,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_notes) {
-            handleSelection("Notes");
+            displayNotes();
         } else if (id == R.id.nav_courses) {
             handleSelection("Courses");
         } else if (id == R.id.nav_share) {
