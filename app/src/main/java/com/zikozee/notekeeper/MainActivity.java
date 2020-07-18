@@ -8,6 +8,7 @@ import android.view.Menu;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -89,8 +90,29 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_notes) {
+            handleSelection("Notes");
+        } else if (id == R.id.nav_courses) {
+            handleSelection("Courses");
+        } else if (id == R.id.nav_share) {
+            handleSelection("Don't you think you've shared enough");
+        } else if (id == R.id.nav_send) {
+            handleSelection("Send");
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void handleSelection(String message) {
+        View view = findViewById(R.id.list_items);
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 }
